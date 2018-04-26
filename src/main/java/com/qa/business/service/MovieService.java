@@ -20,6 +20,10 @@ public class MovieService implements IMovieService {
 		return repo.getMovie(id);
 	}
 	
+	public String createMovie (String jsonMovie) {
+		
+		return repo.createMovie(jsonMovie);
+	}
 
 }
 	
