@@ -7,7 +7,8 @@ public interface IMovieRepository {
 	String getMovie(Long id);
 	
 	String createMovie (String movieJSON);
-
+	
+	String deleteMovie(Long id);
 
 }
 
