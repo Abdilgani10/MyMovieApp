@@ -73,8 +73,22 @@ public class MovieDBRepository implements IMovieRepository {
 			manager.remove(movie);
 			return "{\"message\":\"movie successfully deleted\"}";
 		} else {
-			return "{\"message\":\"movie does not exist\"}";
+			return "{\"massage\":\"movie was not found\"}";
 		}
+			
+		}
+		
+		@Transactional(REQUIRED)
+		public String updateMovie(Long id, String updateMovie) {
+			Movie updatedMovie = util.getObjectForJSON(updateMovie, Movie.class);
+			Movie MovieInDB = findMovie(id);
+			if (MovieInDB != null) {
+				MovieInDB = updatedMovie;
+				manager.merge(MovieInDB);
+				return "{\"message\": \"Movie sucessfully updated.\"}";
+			}else {
+				return "{\"message\": \"Movie not Found.\"}";
+			}
 }
 	
 }
