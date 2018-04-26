@@ -3,6 +3,7 @@ package com.qa.integration;
 import javax.inject.Inject;
 import javax.websocket.server.PathParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
@@ -27,10 +28,18 @@ public class MovieEndpoint {
 	@Path("/json/{id}")
 	@Produces ({"application/json"})
 	
-	public String getMovies(@PathParam("id") Long id){
+	public String getMovie(@PathParam("id") Long id){
 		
 		return service.getMovie(id);
 	}
+	
+	@POST
+	@Path("/json")
+	@Produces ({"application/json"})
+	public String creatMovie(String json) {
+		return service.createMovie(json);
+	}
+	
 
 }
 

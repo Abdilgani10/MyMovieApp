@@ -1,6 +1,7 @@
 package com.qa.business.repository;
 
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import java.util.Collection;
 
@@ -12,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.qa.persistence.domain.Movie;
 import com.qa.util.JSONUtil;
+import static javax.transaction.Transactional.TxType.REQUIRED;
 
 public class MovieDBRepository implements IMovieRepository {
 	
@@ -52,5 +54,15 @@ public class MovieDBRepository implements IMovieRepository {
 	private Movie findMovie(Long id) {
 		return manager.find(Movie.class, id);
 	}
+	
 
+
+	@Transactional(REQUIRED)
+	public String createMovie(String movieJSON) {
+		Movie aMovie = util.getObjectForJSON(movieJSON, Movie.class);
+		manager.persist(aMovie);
+		return "{\"massage\":\"movie created\"}";
+	} 
 }
+
+
